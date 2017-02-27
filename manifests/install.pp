@@ -74,13 +74,11 @@ class grafana::install {
               class { 'apt': }
             }
             apt::source { 'grafana':
-              location => "https://packagecloud.io/grafana/${::grafana::repo_name}/debian",
-              release  => 'wheezy',
-              repos    => 'main',
-              key      =>  {
-                'id'     => '418A7F2FB0E1E6E7EABF6FE8C2E73424D59097AB',
-                'source' => 'https://packagecloud.io/gpg.key'
-              },
+              location   => "https://packagecloud.io/grafana/${::grafana::repo_name}/debian",
+              release    => 'wheezy',
+              repos      => 'main',
+              key        => '418A7F2FB0E1E6E7EABF6FE8C2E73424D59097AB'
+              key_source => 'https://packagecloud.io/gpg.key'
               before   => Package[$::grafana::package_name],
             }
             Class['apt::update'] -> Package[$::grafana::package_name]
